@@ -1,5 +1,6 @@
 const fs = require('fs');
 const path = require('path');
+const crypto = require('crypto');
 
 exports.autoImport = (nextPath, callback)=>{
     let isDir = fs.statSync(nextPath).isDirectory();
@@ -17,4 +18,8 @@ exports.autoImport = (nextPath, callback)=>{
             }
         });
     }
+};
+
+exports.sha256 = (id) => {
+    return crypto.createHmac('sha256', 'bytu').update(`${id}-${new Date()}`).digest('hex');
 };
