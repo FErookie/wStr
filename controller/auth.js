@@ -1,6 +1,7 @@
 const request = require("superagent");
 const {wxConfig} = require("../conf");
 const User = require('../libs/user');
+const {addUser, checkUser} = require('../services/authHandler');
 
 function getSessionKey(code, appId, appSecret){
     return new Promise((resolve, reject) => {
@@ -25,9 +26,18 @@ exports.login = async function(ctx){
         openId: res['openid'],
         sessionKey: res['session_key'],
         headImage: data.avatarUrl,
-        nickname: data.nickname
+        nickname: data.nickName
     };
-    let token = await (new User('123')).setUser(user);
-    ctx.returns({token});
+    try{
+        let status = await checkUser(user.openId);
+        let token = await (new User('123')).setUser(user);
+        if(status){
+            await addUser("" , user.openId, user.sessionKey, "", user.headImage, user.nickname);
+        }
+        ctx.returns({token});
+    }catch (e) {
+        console.log(e);
+        ctx.body = (e);
+    }
 };
 

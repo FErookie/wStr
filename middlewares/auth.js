@@ -2,7 +2,6 @@ const User = require('../libs/user');
 const returns = require('../libs/return');
 
 module.exports = async (ctx, next) => {
-    console.log(ctx.request.headers);
     if (ctx.customeNeedToken) {
         console.log(ctx.request.headers.hasOwnProperty('token'));
         if (ctx.request.headers.hasOwnProperty('token')) {

@@ -1,5 +1,5 @@
-const auth = require("../../controller/auth");
+const {login} = require("../../controller/auth");
 
 module.exports = (router) => {
-    router.post('/public/login', auth.login);
+    router.post('/public/login', login);
 };

@@ -1,4 +1,6 @@
 const path = require('path');
+const root = path.resolve(__dirname, '../');
+const logDir = path.join(root, 'log');
 
 module.exports = {
     db: {
@@ -27,5 +29,10 @@ module.exports = {
     wxConfig:{
         appId: 'wxb70173be95a31d4f',
         appSecret: '2dbf0f12334ca7d3f5d2af78f664aa35',
-    }
+    },
+    log: {
+        root: logDir,
+        err: path.join(logDir, 'err.log'),
+        info: path.join(logDir, 'info.log')
+    },
 }

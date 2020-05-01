@@ -25,7 +25,6 @@ module.exports = async (ctx, next) => {
         }
         ctx.body = returns.msgWrapper(code, data, err);
     };
-
     await next();
 
     ctx.returns = null;
