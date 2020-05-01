@@ -6,7 +6,7 @@ module.exports = {
         username: 'postgres',
         pwd: 'gaoshuda',
         host: '127.0.0.1',
-        database: 'postgres',
+        database: 'wstrdatabase',
         toUrl(){
             return `${this.name}://${this.username}:${this.pwd}@${this.host}/${this.database}`
         }

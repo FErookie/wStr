@@ -20,7 +20,7 @@ exports.login = async function(ctx){
     let data = ctx.request.body;
     let res = JSON.parse(await getSessionKey(data.code, wxConfig.appId, wxConfig.appSecret));
     //用openid去检查是不是数据库中有内容 如果有就算了 没有就发token
-    //下面是发token的逻辑
+    //下面是发token的逻辑`
     let user = {
         openId: res['openid'],
         sessionKey: res['session_key'],

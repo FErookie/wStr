@@ -26,5 +26,10 @@ module.exports = (sequelize, DataTypes) => {
             defaultValue: '游客'
         }
     },{
+        associate: (models) => {
+            let {UserDetails, User} = models;
+            User.hasOne(UserDetails);
+            UserDetails.belongsTo(User);
+        }
     })
 };
