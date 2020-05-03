@@ -28,6 +28,7 @@ exports.login = async function(ctx){
         headImage: data.avatarUrl,
         nickname: data.nickName
     };
+    console.log(user.openId);
     try{
         let status = await checkUser(user.openId);
         let token = await (new User('123')).setUser(user);

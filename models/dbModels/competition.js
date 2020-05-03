@@ -25,7 +25,10 @@ module.exports = (sequelize, DataTypes) => {
             type: DataTypes.TEXT
         },
         finTime: {
-            type: DataTypes.TEXT
+            type: DataTypes.DATE,
+            get() {
+                return moment(this.getDataValue('finTime')).format('YYYY-MM-DD HH:mm:ss')
+            }
         }
     })
 };
