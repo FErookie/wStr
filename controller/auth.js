@@ -1,7 +1,7 @@
 const request = require("superagent");
 const {wxConfig} = require("../conf");
 const User = require('../libs/user');
-const {addUser, checkUser} = require('../services/authHandler');
+const {addUser, checkUser, createUserInfo, updateUserInfo} = require('../services/authHandler');
 
 function getSessionKey(code, appId, appSecret){
     return new Promise((resolve, reject) => {
@@ -18,6 +18,7 @@ function getSessionKey(code, appId, appSecret){
 }
 
 exports.login = async function(ctx){
+    ctx.checkBody("code").notEmpty();   
     let data = ctx.request.body;
     let res = JSON.parse(await getSessionKey(data.code, wxConfig.appId, wxConfig.appSecret));
     //用openid去检查是不是数据库中有内容 如果有就算了 没有就发token
@@ -34,6 +35,7 @@ exports.login = async function(ctx){
         let token = await (new User('123')).setUser(user);
         if(status){
             await addUser("" , user.openId, user.sessionKey, "", user.headImage, user.nickname);
+            await createUserInfo(user.openId);
         }
         ctx.returns({token});
     }catch (e) {
@@ -42,3 +44,15 @@ exports.login = async function(ctx){
     }
 };
 
+exports.updateInfo = async function(ctx){
+    ctx.checkBody("schoolName").notEmpty();
+    ctx.checkBody("wx").notEmpty();
+    ctx.checkBody("phone").notEmpty();
+    ctx.checkBody("qq").notEmpty();
+
+    let data = ctx.request.body;
+    let user = await ctx.customUser.getUser();
+    await updateUserInfo(user.openId, data.schoolName, data.wx, data.phone, data.qq);
+    ctx.return(ctx.code.SUCCESS, "success", null);
+
+};

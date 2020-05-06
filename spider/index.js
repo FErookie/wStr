@@ -1,6 +1,7 @@
 const request = require('superagent');
 const cheerio = require('cheerio');
 const fs = require('fs');
+const {addCompetition} = require('../services/CompHandler.js')
 const baseUrl = 'https://www.saikr.com';
 let requestHtml = function(){
     return new Promise(function(resolve, reject){
@@ -46,12 +47,11 @@ let getList = async function(type, page, list){
                         tmp.sponsor = (contentBox[key].children[1].children[3].children[1].data);
                         tmp.level = (contentBox[key].children[1].children[5].children[1].data);
                         tmp.registrationTime = (contentBox[key].children[1].children[7].children[1].data);
-                        tmp.finTime = (contentBox[key].children[1].children[9].children[1].data);
+                        tmp.finTime = (contentBox[key].children[1].children[9].children[1].data).trim();
                         if(contentBox[key].children[3].children[1].children[0].data.trim() === '官网报名'){
                             tmp.url = (contentBox[key].children[3].children[1].attribs.href);
                         }
-                        list.push(tmp);//这一步改成对数据库写就可以了
-                        console.log(tmp);
+                        addCompetition(tmp.type, tmp.status, tmp.title, tmp.url, tmp.level, tmp.sponsor, tmp.registration, tmp.finTime);
                     }
                 }
                 let next = $('li.next a[rel="next"]');
@@ -82,7 +82,6 @@ let main = async function(){
     for(let element of linkList){
         await getList(element.name, element.link, matchList)
     }
-    console.log(matchList);
 }
 main();
 module.exports = main;

@@ -2,7 +2,7 @@ const db = require('../models/index');
 const {User, UserDetails} = db.models;
 
 exports.addUser = async function add_user(unionId , openId , sessionKey , phone ,headImage , nickname ){
-    User.create({
+    await User.create({
         unionId : unionId,
         openId : openId,
         sessionKey : sessionKey,
@@ -12,7 +12,7 @@ exports.addUser = async function add_user(unionId , openId , sessionKey , phone 
     });
 };// 微信登录时同时触发这个方法
 
-exports.checkUser = function (openid) {
+exports.checkUser = async function (openid) {
     return User.findAll({
         where: {
             openId : openid
@@ -22,7 +22,33 @@ exports.checkUser = function (openid) {
     })
 };// 检测是不是第一次登录 好像没啥用
 
-exports.updateUserInfo = function () {
+exports.createUserInfo = async function(openid){
+    await User.findAll({
+        where: {
+            openId : openid
+        }
+    }).then(data=>{
+        UserDetails.create({
+            UserId: data[0].dataValues.id
+        });
+    })
+};
 
+exports.updateUserInfo = async function (openid, schoolName, contactWx, contactPhone, contactQQ) {
+    let user = await User.findAll({
+        where: {
+            openId : openid
+        }
+    });
+    UserDetails.update({
+        schoolName: schoolName,
+        contact_wx: contactWx,
+        contact_phone: contactPhone,
+        contact_qq: contactQQ
+    },{
+        where: {
+            UserId: user.id
+        }
+    })
 };// 更新用户信息
 

@@ -21,13 +21,32 @@ exports.getMyTeam = async function(openId){
             throw new Error(err);
         })
     })
-};
+};//这里包括所有和参与的
 
-exports.joinTeam = async function() {
+exports.getCompetitionTeam = async function(offset, limit= 10, competitionId){
+    let list = await Team.findAll({
+        where: {
+            CompetitionId: competitionId
+        },
+        offset: offset,
+        limit: limit
+    });
+    let res = [];
+    for(let element of list){
+        res.push(element.dataValues);
+    }
+    return res;
+};//根据比赛id拿到队伍列表
 
+exports.joinTeam = async function(openId, teamId) {
+    await teamToUser.create({
+        isOwner: false,
+        TeamId: teamId,
+        openId: openId
+    })
 };
 // createTeam现在有个问题就是要传过来比赛的id
-exports.createTeam = async function(openId, postTime, details, needPerson, finTime) {
+exports.createTeam = async function(openId, postTime, details, needPerson, finTime, competitionId) {
     return db.transaction(function(t){
         return User.findOne({
             where: {
@@ -38,7 +57,8 @@ exports.createTeam = async function(openId, postTime, details, needPerson, finTi
                 postTime: postTime,
                 details: details,
                 needPerson: needPerson,
-                finTime: finTime
+                finTime: finTime,
+                CompetitionId: competitionId
             });
             await teamToUser.create({
                 isOwner: true,

@@ -5,11 +5,19 @@ module.exports = (sequelize, DataTypes) => {
             primaryKey: true,
             defaultValue: DataTypes.UUIDV4
         },
+        status: {
+            type: DataTypes.TEXT,
+            defaultValue: '薛定谔的比赛'
+        },
         type: {
             type: DataTypes.TEXT,
             defaultValue: '其他'
         },
         title: {
+            type: DataTypes.TEXT,
+            defaultValue: ''
+        },
+        level: {
             type: DataTypes.TEXT,
             defaultValue: ''
         },
@@ -25,10 +33,7 @@ module.exports = (sequelize, DataTypes) => {
             type: DataTypes.TEXT
         },
         finTime: {
-            type: DataTypes.DATE,
-            get() {
-                return moment(this.getDataValue('finTime')).format('YYYY-MM-DD HH:mm:ss')
-            }
+            type: DataTypes.TEXT
         }
     })
 };
