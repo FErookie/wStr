@@ -18,7 +18,7 @@ function getSessionKey(code, appId, appSecret){
 }
 
 exports.login = async function(ctx){
-    ctx.checkBody("code").notEmpty();   
+    ctx.checkBody("code").notEmpty();
     let data = ctx.request.body;
     let res = JSON.parse(await getSessionKey(data.code, wxConfig.appId, wxConfig.appSecret));
     //用openid去检查是不是数据库中有内容 如果有就算了 没有就发token
@@ -53,6 +53,6 @@ exports.updateInfo = async function(ctx){
     let data = ctx.request.body;
     let user = await ctx.customUser.getUser();
     await updateUserInfo(user.openId, data.schoolName, data.wx, data.phone, data.qq);
-    ctx.return(ctx.code.SUCCESS, "success", null);
+    ctx.returns(ctx.code.SUCCESS, "success", null);
 
 };

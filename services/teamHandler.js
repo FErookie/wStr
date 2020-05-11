@@ -23,7 +23,7 @@ exports.getMyTeam = async function(openId){
     })
 };//这里包括所有和参与的
 
-exports.getCompetitionTeam = async function(offset, limit= 10, competitionId){
+exports.getCompetitionTeam = async function(offset, competitionId, limit = 10){
     let list = await Team.findAll({
         where: {
             CompetitionId: competitionId
