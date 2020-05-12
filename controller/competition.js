@@ -9,7 +9,7 @@ exports.getType = async function(ctx) {
 exports.getLists = async function(ctx) {
     ctx.checkBody("offset").notEmpty();
     ctx.checkBody("type").notEmpty();
-    let data = ctx.request.data;
+    let data = ctx.request.body;
     let content = await getTypeCompetition(data.type, data.offset);
     ctx.returns(returns.code.SUCCESS, content, null);
 };

@@ -47,7 +47,7 @@ exports.updateUserInfo = async function (openid, schoolName, contactWx, contactP
         contact_qq: contactQQ
     },{
         where: {
-            UserId: user.id
+            UserId: user[0].dataValues.id
         }
     })
 };// 更新用户信息

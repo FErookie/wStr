@@ -28,10 +28,11 @@ exports.createTeam = async function(ctx) {
     ctx.returns(returns.code.SUCCESS, null, null);
 }
 
-exports.joinTeam = async function(ctx) {
+exports.acceptNewUser = async function(ctx) {
     ctx.checkBody("TeamId").notEmpty();
+    ctx.checkBody("UserId").notEmpty();
 
-    let user = await ctx.customUser.getUser();
-    await joinTeam(user.openId, ctx.request.body.TeamId);
+    await joinTeam(ctx.request.body.UserId, ctx.request.body.TeamId);
     ctx.returns(returns.code.SUCCESS, null, null);
 }
+

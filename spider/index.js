@@ -51,7 +51,7 @@ let getList = async function(type, page, list){
                         if(contentBox[key].children[3].children[1].children[0].data.trim() === '官网报名'){
                             tmp.url = (contentBox[key].children[3].children[1].attribs.href);
                         }
-                        addCompetition(tmp.type, tmp.status, tmp.title, tmp.url, tmp.level, tmp.sponsor, tmp.registration, tmp.finTime);
+                        addCompetition(tmp.type, tmp.status, tmp.title, tmp.url, tmp.level, tmp.sponsor, tmp.registrationTime, tmp.finTime);
                     }
                 }
                 let next = $('li.next a[rel="next"]');

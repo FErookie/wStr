@@ -19,7 +19,11 @@ exports.getType = async function(){
         attributes: ['type'],
         group: ['type']
     });
-    console.log(res);
+    let data = new Set();
+    for (let element of res){
+        data.add(element.dataValues.type);
+    }
+    return [].concat(...data);
 };
 
 exports.getTypeCompetition = async function(type, offset, limit= 10){
@@ -30,5 +34,9 @@ exports.getTypeCompetition = async function(type, offset, limit= 10){
         limit: limit,
         offset: offset
     });
-    console.log(res);
+    let data = [];
+    for (let element of res){
+        data.push(element.dataValues);
+    }
+    return data;
 };
