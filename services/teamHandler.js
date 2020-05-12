@@ -60,6 +60,7 @@ exports.createTeam = async function(openId, postTime, details, needPerson, finTi
                 finTime: finTime,
                 CompetitionId: competitionId
             });
+            console.log(team);
             await teamToUser.create({
                 isOwner: true,
                 TeamId: team.dataValues.id,

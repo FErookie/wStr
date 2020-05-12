@@ -1,9 +1,14 @@
 const db = require('../models/index');
-const {message, teamToUser, Team} = db.models;
+const {message, teamToUser, Team, User} = db.models;
 
-exports.dispatchMessage = async function (userId, teamId) {
+exports.dispatchMessage = async function (openid, teamId) {
+    let user = await User.findAll({
+        where: {
+            openId : openid
+        }
+    });
     await message.create({
-        userId: userId,
+        userId: user[0].dataValues.id,
         teamId: teamId
     })
 };

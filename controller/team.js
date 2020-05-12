@@ -24,7 +24,8 @@ exports.createTeam = async function(ctx) {
 
     let user = await ctx.customUser.getUser();
     let data = ctx.request.body;
-    await createTeam(user.openId, data.postTime, data.details, data.needPerson, data.finTime, data.CompetitionId);
+    console.log(data.competitionId);
+    await createTeam(user.openId, data.postTime, data.details, data.needPerson, data.finTime, data.competitionId);
     ctx.returns(returns.code.SUCCESS, null, null);
 }
 

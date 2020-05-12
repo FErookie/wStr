@@ -310,3 +310,223 @@ data: {
 }
 }
 ```
+### route名: /public/createTeam
+
+请求类型: post  
+请求体:
+```
+{
+    "postTime": "2019-12-13",
+    "details": "测试用队伍",
+    "needPerson": 3,
+    "finTime": "2019-12-22",
+    "competitionId": "2e52a6f1-1d9b-48c4-914a-1136689ac152"
+}
+```
+响应结果
+```
+data: {
+    "code": 200,
+    "data": null
+    "err": null
+}
+```
+### route名: /public/createTeam
+
+请求类型: post  
+请求体:
+```
+{
+    "postTime": "2019-12-13",
+    "details": "测试用队伍",
+    "needPerson": 3,
+    "finTime": "2019-12-22",
+    "competitionId": "2e52a6f1-1d9b-48c4-914a-1136689ac152"
+}
+```
+响应结果
+```
+data: {
+    "code": 200,
+    "data": null
+    "err": null
+}
+```
+### route名: /public/getCompetitionTeam
+
+请求类型: post  
+请求体:
+```
+{
+  "offset" : 0,
+  "competitionId" : "2e52a6f1-1d9b-48c4-914a-1136689ac152"
+}
+```
+响应结果
+```
+data: {
+    "code": 200,
+    "data": [
+        {
+            "id": "41e30bab-414e-4ef4-a3e9-6640bd5017b9",
+            "postTime": "2019-12-13T00:00:00.000Z",
+            "details": "测试用队伍",
+            "needPerson": 3,
+            "finTime": "2019-12-22T00:00:00.000Z",
+            "createdAt": "2020-05-12T11:20:38.780Z",
+            "updatedAt": "2020-05-12T11:20:38.780Z",
+            "CompetitionId": "2e52a6f1-1d9b-48c4-914a-1136689ac152"
+        },
+        {
+            "id": "458a8794-a60a-4e12-a7e8-e314420cd273",
+            "postTime": "2019-12-13T00:00:00.000Z",
+            "details": "测试用队伍",
+            "needPerson": 3,
+            "finTime": "2019-12-22T00:00:00.000Z",
+            "createdAt": "2020-05-12T11:21:40.144Z",
+            "updatedAt": "2020-05-12T11:21:40.144Z",
+            "CompetitionId": "2e52a6f1-1d9b-48c4-914a-1136689ac152"
+        },
+        {
+            "id": "71693995-19e4-4659-8d29-4bf013505d56",
+            "postTime": "2019-12-13T00:00:00.000Z",
+            "details": "测试用队伍",
+            "needPerson": 3,
+            "finTime": "2019-12-22T00:00:00.000Z",
+            "createdAt": "2020-05-12T11:22:33.171Z",
+            "updatedAt": "2020-05-12T11:22:33.171Z",
+            "CompetitionId": "2e52a6f1-1d9b-48c4-914a-1136689ac152"
+        },
+        {
+            "id": "df14a4b4-db29-4185-a4bb-48e39d48c85e",
+            "postTime": "2019-12-13T00:00:00.000Z",
+            "details": "测试用队伍",
+            "needPerson": 3,
+            "finTime": "2019-12-22T00:00:00.000Z",
+            "createdAt": "2020-05-12T11:22:33.890Z",
+            "updatedAt": "2020-05-12T11:22:33.890Z",
+            "CompetitionId": "2e52a6f1-1d9b-48c4-914a-1136689ac152"
+        },
+        {
+            "id": "d14992d4-166a-4a09-b059-f6ad49644ced",
+            "postTime": "2019-12-13T00:00:00.000Z",
+            "details": "测试用队伍",
+            "needPerson": 3,
+            "finTime": "2019-12-22T00:00:00.000Z",
+            "createdAt": "2020-05-12T11:22:35.133Z",
+            "updatedAt": "2020-05-12T11:22:35.133Z",
+            "CompetitionId": "2e52a6f1-1d9b-48c4-914a-1136689ac152"
+        },
+        {
+            "id": "dccb2d90-16c1-4f59-9328-1133569813b3",
+            "postTime": "2019-12-13T00:00:00.000Z",
+            "details": "测试用队伍",
+            "needPerson": 3,
+            "finTime": "2019-12-22T00:00:00.000Z",
+            "createdAt": "2020-05-12T11:22:36.429Z",
+            "updatedAt": "2020-05-12T11:22:36.429Z",
+            "CompetitionId": "2e52a6f1-1d9b-48c4-914a-1136689ac152"
+        }
+    ],
+    "err": null
+}
+```
+### route名: /team/getMyTeam
+
+请求类型: get  
+
+响应结果
+```
+data: {
+          "code": 200,
+          "data": [
+              {
+                  "isOwner": true,
+                  "createdAt": "2020-05-12T11:20:38.796Z",
+                  "updatedAt": "2020-05-12T11:20:38.796Z",
+                  "TeamId": "41e30bab-414e-4ef4-a3e9-6640bd5017b9",
+                  "UserId": "b897a97d-6d1c-476a-9de1-8236eb129786"
+              },
+              {
+                  "isOwner": true,
+                  "createdAt": "2020-05-12T11:21:40.161Z",
+                  "updatedAt": "2020-05-12T11:21:40.161Z",
+                  "TeamId": "458a8794-a60a-4e12-a7e8-e314420cd273",
+                  "UserId": "b897a97d-6d1c-476a-9de1-8236eb129786"
+              },
+              {
+                  "isOwner": true,
+                  "createdAt": "2020-05-12T11:22:33.190Z",
+                  "updatedAt": "2020-05-12T11:22:33.190Z",
+                  "TeamId": "71693995-19e4-4659-8d29-4bf013505d56",
+                  "UserId": "b897a97d-6d1c-476a-9de1-8236eb129786"
+              },
+              {
+                  "isOwner": true,
+                  "createdAt": "2020-05-12T11:22:33.898Z",
+                  "updatedAt": "2020-05-12T11:22:33.898Z",
+                  "TeamId": "df14a4b4-db29-4185-a4bb-48e39d48c85e",
+                  "UserId": "b897a97d-6d1c-476a-9de1-8236eb129786"
+              },
+              {
+                  "isOwner": true,
+                  "createdAt": "2020-05-12T11:22:35.147Z",
+                  "updatedAt": "2020-05-12T11:22:35.147Z",
+                  "TeamId": "d14992d4-166a-4a09-b059-f6ad49644ced",
+                  "UserId": "b897a97d-6d1c-476a-9de1-8236eb129786"
+              },
+              {
+                  "isOwner": true,
+                  "createdAt": "2020-05-12T11:22:36.441Z",
+                  "updatedAt": "2020-05-12T11:22:36.441Z",
+                  "TeamId": "dccb2d90-16c1-4f59-9328-1133569813b3",
+                  "UserId": "b897a97d-6d1c-476a-9de1-8236eb129786"
+              }
+          ],
+          "err": null
+      }
+```
+### route名: /message/dispatch
+用来发起申请
+请求类型: post  
+请求体:
+```
+{
+    "teamId": ""
+}
+```
+响应结果
+```
+data: {
+    "code": 200,
+    "data": null,
+    "err": null
+}
+```
+
+### route名：/message/getMessage
+用来看自己队伍的申请
+请求类型: post  
+请求体:
+```
+{
+    "teamId": ""
+}
+```
+响应结果
+```
+data: {
+          "code": 200,
+          "data": [
+              {
+                  "id": "d312ea27-933e-4703-91af-3105d2286653",
+                  "userId": "b897a97d-6d1c-476a-9de1-8236eb129786",
+                  "teamId": "41e30bab-414e-4ef4-a3e9-6640bd5017b9",
+                  "hasDeal": false,
+                  "createdAt": "2020-05-12T11:37:00.647Z",
+                  "updatedAt": "2020-05-12T11:37:00.647Z"
+              }
+          ],
+          "err": null
+      }
+```

@@ -6,7 +6,7 @@ exports.dispatch = async function (ctx) {
     ctx.checkBody("teamId").notEmpty();
 
     let user = await ctx.customUser.getUser();
-    await dispatchMessage(user.id, ctx.request.body.teamId);
+    await dispatchMessage(user.openId, ctx.request.body.teamId);
     ctx.returns(returns.code.SUCCESS, null, null);
 }
 
