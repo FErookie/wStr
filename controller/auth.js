@@ -2,6 +2,7 @@ const request = require("superagent");
 const {wxConfig} = require("../conf");
 const User = require('../libs/user');
 const {addUser, checkUser, createUserInfo, updateUserInfo} = require('../services/authHandler');
+const returns = require('../libs/return');
 
 function getSessionKey(code, appId, appSecret){
     return new Promise((resolve, reject) => {
@@ -53,6 +54,6 @@ exports.updateInfo = async function(ctx){
     let data = ctx.request.body;
     let user = await ctx.customUser.getUser();
     await updateUserInfo(user.openId, data.schoolName, data.wx, data.phone, data.qq);
-    ctx.returns(ctx.code.SUCCESS, "success", null);
+    ctx.returns(returns.code.SUCCESS, "success", null);
 
 };
