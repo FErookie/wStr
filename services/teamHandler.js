@@ -39,11 +39,11 @@ exports.getCompetitionTeam = async function(offset, competitionId, limit = 10){
     return res;
 };//根据比赛id拿到队伍列表
 
-exports.joinTeam = async function(openId, teamId) {
+exports.joinTeam = async function(userId, teamId) {
     await teamToUser.create({
         isOwner: false,
         TeamId: teamId,
-        openId: openId
+        userId: userId
     })
 };
 // createTeam现在有个问题就是要传过来比赛的id

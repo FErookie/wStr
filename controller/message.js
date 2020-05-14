@@ -1,5 +1,6 @@
 //这个文件处理入队申请
-const {dispatchMessage, getMyTeamApply, getMyFeedBack, updateMsg} = require("../services/msgHandler")
+import {getId} from "../services/authHandler";
+const {dispatchMessage, getMyTeamApply, getMyFeedBack, updateMsg, getMsg} = require("../services/msgHandler")
 const {joinTeam} = require('../services/teamHandler')
 const returns = require('../libs/return');
 
@@ -7,7 +8,8 @@ exports.dispatch = async function (ctx) {
     ctx.checkBody("teamId").notEmpty();
 
     let user = await ctx.customUser.getUser();
-    await dispatchMessage(user.openId, ctx.request.body.teamId);//我们所看到的消息实际上是发布者 和 申请的队伍的消息
+    let id = getId(user.openId);
+    await dispatchMessage(id, ctx.request.body.teamId);//我们所看到的消息实际上是发布者 和 申请的队伍的消息
     ctx.returns(returns.code.SUCCESS, null, null);
 }
 
@@ -28,10 +30,10 @@ exports.getMyFeedBack = async function (ctx) {
 exports.dealMessage = async function (ctx) {
     ctx.checkBody("msgId").notEmpty();
     ctx.checkBody("status").notEmpty();
-    let user = await ctx.customUser.getUser();
-
+    ctx.checkBody("describeText").notEmpty();
     if(ctx.request.body.status){
-        await joinTeam(user.openId, )
+        let data = await getMsg(ctx.request.body.msgId);
+        await joinTeam(data.userId, data.teamId);
     }
-    await updateMsg(ctx.request.body.msgId, true, ctx.request.body.status);
+    await updateMsg(ctx.request.body.msgId, true, ctx.request.body.status, ctx.request.body.describeText);
 }

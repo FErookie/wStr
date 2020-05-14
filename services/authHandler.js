@@ -52,3 +52,12 @@ exports.updateUserInfo = async function (openid, schoolName, contactWx, contactP
     })
 };// 更新用户信息
 
+exports.getId = async function (openid) {
+    let res = await User.findAll({
+        attributes: ['id'],
+        where: {
+            openid: openid
+        }
+    });
+    return res;
+}

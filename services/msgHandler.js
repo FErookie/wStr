@@ -31,13 +31,23 @@ exports.getMyFeedBack = async function (userId) {
     return data;
 };
 
-exports.updateMsg = async function (msgId, isDeal, status) {
+exports.updateMsg = async function (msgId, isDeal, status, text) {
     message.update({
         hasDeal: isDeal,
-        status: status
+        status: status,
+        describeText: text
     },{
         where: {
             id: msgId
         }
     })
+}
+
+exports.getMsg = async function (msgId) {
+    let data = await message.findOne({
+        where: {
+            id: msgId
+        }
+    });
+    return data.dataValues;
 }
