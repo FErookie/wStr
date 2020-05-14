@@ -13,10 +13,31 @@ exports.dispatchMessage = async function (openid, teamId) {
     })
 };
 
-exports.getMyTeamApply = async function(TeamId) {
-    return message.findAll({
+exports.getMyTeamApply = async function (TeamId) {
+    let data = await message.findAll({
         where: {
             teamId: TeamId
         }
     });
+    return data;
+};
+
+exports.getMyFeedBack = async function (userId) {
+    let data = await message.findAll({
+        where: {
+            userId: userId
+        }
+    });
+    return data;
+};
+
+exports.updateMsg = async function (msgId, isDeal, status) {
+    message.update({
+        hasDeal: isDeal,
+        status: status
+    },{
+        where: {
+            id: msgId
+        }
+    })
 }

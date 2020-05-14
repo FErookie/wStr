@@ -9,7 +9,8 @@ exports.getMyTeam = async function(openId){
         }, {transaction: t}).then(async function (user) {
             let list = await teamToUser.findAll({
                 where: {
-                    UserId: user.id
+                    UserId: user.id,
+                    isOwner: true
                 }
             });
             let res = [];

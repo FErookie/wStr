@@ -16,6 +16,15 @@ module.exports = (sequelize, DataTypes) => {
         hasDeal: {
             type: DataTypes.BOOLEAN,
             defaultValue: false
+        },
+        // true 是同意 false 是拒绝
+        status: {
+            type: DataTypes.BOOLEAN,
+            defaultValue: false
+        },
+        describeText: {
+            type: DataTypes.TEXT,
+            defaultValue: ""
         }
     })
 };
