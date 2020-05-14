@@ -8,16 +8,15 @@
 
 ### route名： /public/login
 
-请求类型：post  
-
-请求参数：
+请求类型：post    
+请求参数：  
 ```
 {
     code ：wx.login success 回调返回的res.code 
 } 
 ```
-
-响应结果: 
+  
+响应结果:   
 ```
 data:{
     data:{token:"token值"}, 
@@ -28,8 +27,8 @@ data:{
 
 ### route名: /auth/updateInfo
 
-请求类型: post
-请求参数:   
+请求类型: post  
+请求参数:     
 ```
 {  
 	"schoolName": "",  
@@ -38,7 +37,7 @@ data:{
 	"phone": ""  
 }
 ```
-响应结果
+响应结果  
 ```
 data:{
     data:null, 
@@ -49,8 +48,8 @@ data:{
 ```
 ### route名: /public/getTypes
 
-请求类型: get
-响应结果
+请求类型: get   
+响应结果  
 ```
 data: {
     "code": 200,
@@ -95,7 +94,8 @@ data: {
 
 ### route名: /public/getTypes
 
-请求类型: get
+请求类型: get  
+响应结果  
 ```
 data: {
     "code": 200,
@@ -161,15 +161,15 @@ data: {
 
 ### route名: /public/getLists
 
-请求类型: post  
-请求体:
+请求类型: post    
+请求体:  
 ```
 {
     type: "",
     offset: ,//分页用的数字
 }
 ```
-响应结果
+响应结果  
 ```
 data: {
 {
@@ -312,8 +312,8 @@ data: {
 ```
 ### route名: /public/createTeam
 
-请求类型: post  
-请求体:
+请求类型: post   
+请求体:  
 ```
 {
     "postTime": "2019-12-13",
@@ -323,7 +323,7 @@ data: {
     "competitionId": "2e52a6f1-1d9b-48c4-914a-1136689ac152"
 }
 ```
-响应结果
+响应结果  
 ```
 data: {
     "code": 200,
@@ -333,8 +333,8 @@ data: {
 ```
 ### route名: /public/createTeam
 
-请求类型: post  
-请求体:
+请求类型: post    
+请求体:  
 ```
 {
     "postTime": "2019-12-13",
@@ -354,15 +354,15 @@ data: {
 ```
 ### route名: /public/getCompetitionTeam
 
-请求类型: post  
-请求体:
+请求类型: post   
+请求体:  
 ```
 {
   "offset" : 0,
   "competitionId" : "2e52a6f1-1d9b-48c4-914a-1136689ac152"
 }
 ```
-响应结果
+响应结果  
 ```
 data: {
     "code": 200,
@@ -433,9 +433,9 @@ data: {
 ```
 ### route名: /team/getMyTeam
 
-请求类型: get  
+请求类型: get    
 
-响应结果
+响应结果  
 ```
 data: {
           "code": 200,
@@ -487,9 +487,9 @@ data: {
       }
 ```
 ### route名: /message/dispatch
-用来发起申请
-请求类型: post  
-请求体:
+用来发起申请  
+请求类型: post    
+请求体:  
 ```
 {
     "teamId": ""
@@ -505,15 +505,15 @@ data: {
 ```
 
 ### route名：/message/getMessage
-用来看自己队伍的申请
-请求类型: post  
-请求体:
+用来看自己队伍的申请  
+请求类型: post    
+请求体:  
 ```
 {
     "teamId": ""
 }
 ```
-响应结果
+响应结果  
 ```
 data: {
           "code": 200,
