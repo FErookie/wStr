@@ -59,5 +59,5 @@ exports.getId = async function (openid) {
             openid: openid
         }
     });
-    return res;
+    return res[0].dataValues;
 }

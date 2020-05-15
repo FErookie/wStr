@@ -23,3 +23,11 @@ exports.autoImport = (nextPath, callback)=>{
 exports.sha256 = (id) => {
     return crypto.createHmac('sha256', 'bytu').update(`${id}-${new Date()}`).digest('hex');
 };
+
+exports.parseFindAll = (data) => {
+    let res = [];
+    for(let element of data){
+        res.push(element.dataValues);
+    }
+    return res;
+}

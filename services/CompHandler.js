@@ -1,5 +1,6 @@
 const db = require('../models/index');
 const {Competition} = db.models;
+const {parseFindAll} = require('../utils');
 
 exports.addCompetition = async function(type, status, title, url, level, sponsor, registration, finTime) {
     await Competition.create({
@@ -27,16 +28,12 @@ exports.getType = async function(){
 };
 
 exports.getTypeCompetition = async function(type, offset, limit= 10){
-    let res = await Competition.findAll({
+    let data = await Competition.findAll({
         where: {
             type: type,
         },
         limit: limit,
         offset: offset
     });
-    let data = [];
-    for (let element of res){
-        data.push(element.dataValues);
-    }
-    return data;
+    return parseFindAll(data);
 };

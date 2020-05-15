@@ -1,5 +1,7 @@
 const db = require('../models/index');
 const {User, Team, teamToUser} = db.models;
+const {parseFindAll} = require('../utils');
+
 exports.getMyTeam = async function(openId){
     return db.transaction(function (t) {
         return User.findOne({
@@ -32,11 +34,7 @@ exports.getCompetitionTeam = async function(offset, competitionId, limit = 10){
         offset: offset,
         limit: limit
     });
-    let res = [];
-    for(let element of list){
-        res.push(element.dataValues);
-    }
-    return res;
+    return parseFindAll(list);
 };//根据比赛id拿到队伍列表
 
 exports.joinTeam = async function(userId, teamId) {

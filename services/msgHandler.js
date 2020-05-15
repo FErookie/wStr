@@ -1,6 +1,6 @@
 const db = require('../models/index');
 const {message, teamToUser, Team, User} = db.models;
-
+const {parseFindAll} = require('../utils');
 exports.dispatchMessage = async function (openid, teamId) {
     let user = await User.findAll({
         where: {
@@ -19,16 +19,17 @@ exports.getMyTeamApply = async function (TeamId) {
             teamId: TeamId
         }
     });
-    return data;
+    return parseFindAll(data);
 };
 
 exports.getMyFeedBack = async function (userId) {
     let data = await message.findAll({
         where: {
-            userId: userId
+            userId: userId,
+            hasDeal: true
         }
     });
-    return data;
+    return parseFindAll(data);
 };
 
 exports.updateMsg = async function (msgId, isDeal, status, text) {
