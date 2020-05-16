@@ -2,6 +2,17 @@ const db = require('../models/index');
 const {User, Team, teamToUser} = db.models;
 const {parseFindAll} = require('../utils');
 
+exports.queryStatus = async function(userId, teamId){
+    let relationShip = await teamToUser.findOne({
+        where: {
+            UserId: userId,
+            TeamId: teamId
+        }
+    })
+    console.log(relationShip);
+    return relationShip === null;
+}//用来看当前用户是不是已经存在在这个队伍里了
+
 exports.getMyTeam = async function(openId){
     return db.transaction(function (t) {
         return User.findOne({
@@ -41,7 +52,7 @@ exports.joinTeam = async function(userId, teamId) {
     await teamToUser.create({
         isOwner: false,
         TeamId: teamId,
-        userId: userId
+        UserId: userId
     })
 };
 // createTeam现在有个问题就是要传过来比赛的id

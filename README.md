@@ -495,7 +495,7 @@ data: {
     "teamId": ""
 }
 ```
-响应结果
+响应结果 不在队伍中时
 ```
 data: {
     "code": 200,
@@ -503,7 +503,14 @@ data: {
     "err": null
 }
 ```
-
+如果已经在队伍中了
+```
+{
+    "code": 200,
+    "data": "你已经在这个队伍中了 不要重复申请",
+    "err": null
+}
+```
 ### route名：/message/getMessage
 用来看自己队伍的申请  
 请求类型: post    
@@ -516,17 +523,83 @@ data: {
 响应结果  
 ```
 data: {
-          "code": 200,
-          "data": [
-              {
-                  "id": "d312ea27-933e-4703-91af-3105d2286653",
-                  "userId": "b897a97d-6d1c-476a-9de1-8236eb129786",
-                  "teamId": "41e30bab-414e-4ef4-a3e9-6640bd5017b9",
-                  "hasDeal": false,
-                  "createdAt": "2020-05-12T11:37:00.647Z",
-                  "updatedAt": "2020-05-12T11:37:00.647Z"
-              }
-          ],
-          "err": null
-      }
+         "code": 200,
+         "data": [
+             {
+                 "id": "49fa569f-1dd4-4ad1-9abc-f931c2adb460",
+                 "userId": "97daf453-af4f-4f1f-87c4-d2641d2d71a9",
+                 "teamId": "21bf3ae3-067f-4d9a-9adc-8ac79e27d415",
+                 "hasDeal": false,
+                 "status": false,
+                 "describeText": "测试消息",
+                 "createdAt": "2020-05-16T10:30:31.340Z",
+                 "updatedAt": "2020-05-16T10:30:31.340Z"
+             }
+         ],
+         "err": null
+     }
+```
+### route 名 /message/dealMessage
+暂时支持对消息进行多次处理 可以商量  
+请求类型: post    
+请求体:  
+```
+{
+	"msgId": "49fa569f-1dd4-4ad1-9abc-f931c2adb460",
+	"status": true,//用来表示同不同意 
+	"describeText": "huanying"
+}
+```
+响应结果：
+```
+
+data: {
+    "code": 200,
+    "data": "处理完成",
+    "err": null
+}
+
+```
+
+### route 名 /message/dealMessage
+暂时支持对消息进行多次处理 可以商量  
+请求类型: post    
+请求体:  
+```
+{
+	"msgId": "49fa569f-1dd4-4ad1-9abc-f931c2adb460",
+	"status": true,//用来表示同不同意 
+	"describeText": "huanying"
+}
+```
+响应结果：
+```
+
+data: {
+    "code": 200,
+    "data": "处理完成",
+    "err": null
+}
+
+```
+### 路由名：/message/getMyFeedBack
+请求类型：get
+响应体：
+``` 
+{
+    "code": 200,
+    "data": [
+        {
+            "id": "49fa569f-1dd4-4ad1-9abc-f931c2adb460",
+            "userId": "97daf453-af4f-4f1f-87c4-d2641d2d71a9",
+            "teamId": "21bf3ae3-067f-4d9a-9adc-8ac79e27d415",
+            "hasDeal": true,
+            "status": true,
+            "describeText": "huanying",
+            "createdAt": "2020-05-16T10:30:31.340Z",
+            "updatedAt": "2020-05-16T10:48:51.065Z"
+        }
+    ],
+    "err": null
+}
 ```

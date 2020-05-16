@@ -1,15 +1,11 @@
 const db = require('../models/index');
 const {message, teamToUser, Team, User} = db.models;
 const {parseFindAll} = require('../utils');
-exports.dispatchMessage = async function (openid, teamId) {
-    let user = await User.findAll({
-        where: {
-            openId : openid
-        }
-    });
+exports.dispatchMessage = async function (userid, teamId, description) {
     await message.create({
-        userId: user[0].dataValues.id,
-        teamId: teamId
+        userId: userid,
+        teamId: teamId,
+        describeText: description
     })
 };
 
@@ -25,8 +21,7 @@ exports.getMyTeamApply = async function (TeamId) {
 exports.getMyFeedBack = async function (userId) {
     let data = await message.findAll({
         where: {
-            userId: userId,
-            hasDeal: true
+            userId: userId
         }
     });
     return parseFindAll(data);

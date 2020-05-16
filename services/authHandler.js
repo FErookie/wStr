@@ -56,8 +56,8 @@ exports.getId = async function (openid) {
     let res = await User.findAll({
         attributes: ['id'],
         where: {
-            openid: openid
+            openId: openid
         }
     });
-    return res[0].dataValues;
+    return res[0].dataValues.id;
 }
