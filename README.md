@@ -19,7 +19,14 @@
 响应结果:   
 ```
 data:{
-    data:{token:"token值"}, 
+    details: {
+        id: 1, 
+        schoolName: "克莱登大学",
+        contact_wx: "",
+        contact_phone: "", 
+        contact_qq: "", …
+    }
+    token: "dacbdf8119da4bee3ee1a4d7a9082697bfef1ab5e580dddb908cc07d89a7dc77"
     err: null, 
     code: 200
 }
@@ -331,7 +338,7 @@ data: {
     "err": null
 }
 ```
-### route名: /public/createTeam
+### route名: /team/createTeam
 
 请求类型: post    
 请求体:  
@@ -352,7 +359,7 @@ data: {
     "err": null
 }
 ```
-### route名: /public/getCompetitionTeam
+### route名: /team/getCompetitionTeam
 
 请求类型: post   
 请求体:  
@@ -602,4 +609,34 @@ data: {
     ],
     "err": null
 }
+```
+### 路由名：/competition/getCompetition
+请求类型：post
+请求体:  
+```
+{
+	"competitionId": ""
+}
+```
+响应结果：
+```
+
+data: {
+    "code": 200,
+    "data":        {
+                        "id": "d55de802-7853-40f1-a1c0-7eed7fac0248",
+                        "status": "正在报名",
+                        "type": "工科",
+                        "title": "2020江西财经大学数学建模竞赛",
+                        "level": "校级",
+                        "url": "https://www.saikr.com/vse/2020JUFEMCM",
+                        "sponsor": "江西财经大学创业学院、信息管理学院",
+                        "registration": "2020.05.06 ～ 2020.05.20",
+                        "finTime": "2020.05.21 ～ 2020.05.26",
+                        "createdAt": "2020-05-12T07:23:03.342Z",
+                        "updatedAt": "2020-05-12T07:23:03.342Z"
+                    }
+    "err": null
+}
+
 ```

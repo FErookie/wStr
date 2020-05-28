@@ -37,3 +37,12 @@ exports.getTypeCompetition = async function(type, offset, limit= 10){
     });
     return parseFindAll(data);
 };
+
+exports.getCompetition = async function(competitionId) {
+    let data = await Competition.findOne({
+        where: {
+            id: competitionId
+        }
+    })
+    return data.dataValues;
+}

@@ -1,7 +1,7 @@
 const request = require("superagent");
 const {wxConfig} = require("../conf");
 const User = require('../libs/user');
-const {addUser, checkUser, createUserInfo, updateUserInfo} = require('../services/authHandler');
+const {addUser, checkUser, createUserInfo, updateUserInfo, queryUserDetails, getId} = require('../services/authHandler');
 const returns = require('../libs/return');
 
 function getSessionKey(code, appId, appSecret){
@@ -38,7 +38,12 @@ exports.login = async function(ctx){
             await addUser("" , user.openId, user.sessionKey, "", user.headImage, user.nickname);
             await createUserInfo(user.openId);
         }
-        ctx.returns({token});
+        let id = await getId(user.openId);
+        let details = await queryUserDetails(id);
+        ctx.returns({
+            "token": token,
+            "details": details
+        });
     }catch (e) {
         console.log(e);
         ctx.body = (e);

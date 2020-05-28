@@ -1,8 +1,8 @@
 const db = require('../models/index');
-const {User, Team, teamToUser} = db.models;
+const {User, Team, teamToUser, UserDetails} = db.models;
 const {parseFindAll} = require('../utils');
 
-exports.queryStatus = async function(userId, teamId){
+exports.queryStatus = async function (userId, teamId) {
     let relationShip = await teamToUser.findOne({
         where: {
             UserId: userId,
@@ -13,7 +13,7 @@ exports.queryStatus = async function(userId, teamId){
     return relationShip === null;
 }//用来看当前用户是不是已经存在在这个队伍里了
 
-exports.getMyTeam = async function(openId){
+exports.getMyTeam = async function (openId) {
     return db.transaction(function (t) {
         return User.findOne({
             where: {
@@ -27,7 +27,7 @@ exports.getMyTeam = async function(openId){
                 }
             });
             let res = [];
-            for(let element of list){
+            for (let element of list) {
                 res.push(element.dataValues);
             }
             return res;
@@ -37,7 +37,7 @@ exports.getMyTeam = async function(openId){
     })
 };//这里包括所有和参与的
 
-exports.getCompetitionTeam = async function(offset, competitionId, limit = 10){
+exports.getCompetitionTeam = async function (offset, competitionId, limit = 10) {
     let list = await Team.findAll({
         where: {
             CompetitionId: competitionId
@@ -47,8 +47,53 @@ exports.getCompetitionTeam = async function(offset, competitionId, limit = 10){
     });
     return parseFindAll(list);
 };//根据比赛id拿到队伍列表
-
-exports.joinTeam = async function(userId, teamId) {
+exports.getCompetitionTeamDetails = async function (offset, competitionId, limit = 10, schoolName = null) {
+    let list = await Team.findAll({
+        where: {
+            CompetitionId: competitionId
+        },
+        offset: offset,
+        limit: limit
+    });
+    //首先 要从所有的这个list中的每一个的信息里得到对应的User 和 UserDetail 然后返回
+    let data = parseFindAll(list);
+    let res = [];
+    for (let element of data) {
+        //这个也只会有一个
+        let userIDs = teamToUser.findAll({
+            where: {
+                TeamId: element.id,
+                isOwner: true
+            },
+        });
+        if (schoolName !== null) {
+            let userDetail = UserDetails.findOne({
+                where: {
+                    UserId: userIDs.dataValues[0].id,
+                    schoolName: schoolName
+                }
+            });
+            if (userDetail) {
+                res.push({
+                    teamData: element,
+                    userData: userDetail
+                });
+            }
+        } else {
+            let userDetail = UserDetails.findOne({
+                where: {
+                    UserId: userIDs.dataValues[0].id
+                }
+            });
+            res.push({
+                teamData: element,
+                userData: userDetail
+            });
+        }
+    }
+    return res;
+};//根据比赛id拿到队伍列表
+exports.joinTeam = async function (userId, teamId) {
     await teamToUser.create({
         isOwner: false,
         TeamId: teamId,
@@ -56,13 +101,13 @@ exports.joinTeam = async function(userId, teamId) {
     })
 };
 // createTeam现在有个问题就是要传过来比赛的id
-exports.createTeam = async function(openId, postTime, details, needPerson, finTime, competitionId) {
-    return db.transaction(function(t){
+exports.createTeam = async function (openId, postTime, details, needPerson, finTime, competitionId) {
+    return db.transaction(function (t) {
         return User.findOne({
             where: {
                 openId: openId
             }
-        }, {transaction: t}).then(async function(user){
+        }, {transaction: t}).then(async function (user) {
             let team = await Team.create({
                 postTime: postTime,
                 details: details,

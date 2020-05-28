@@ -61,3 +61,12 @@ exports.getId = async function (openid) {
     });
     return res[0].dataValues.id;
 }
+
+exports.queryUserDetails = async function(id) {
+    let data = await UserDetails.findOne({
+        where: {
+            UserId: id
+        }
+    });
+    return data.dataValues;
+}
