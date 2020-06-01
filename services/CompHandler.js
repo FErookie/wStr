@@ -44,5 +44,5 @@ exports.getCompetition = async function(competitionId) {
             id: competitionId
         }
     })
-    return data.dataValues;
+    return data === null ? data :  data.dataValues;
 }

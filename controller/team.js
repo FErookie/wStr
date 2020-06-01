@@ -16,8 +16,8 @@ exports.getCompetitionTeam = async function(ctx) {
 }
 exports.getCompetitionTeamDetails = async function(ctx) {
     ctx.checkBody("competitionId").notEmpty();
-    let cid = ctx.request.body.competitionId;
-    let content = await getCompetitionTeamDetails(cid);
+    let data = ctx.request.body;
+    let content = await getCompetitionTeamDetails(data.offset, data.competitionId, data.limit, data.schoolName);
     ctx.returns(returns.code.SUCCESS, content, null);
 }
 

@@ -57,19 +57,21 @@ exports.getCompetitionTeamDetails = async function (offset, competitionId, limit
     });
     //首先 要从所有的这个list中的每一个的信息里得到对应的User 和 UserDetail 然后返回
     let data = parseFindAll(list);
+    console.log(data);
     let res = [];
     for (let element of data) {
         //这个也只会有一个
-        let userIDs = teamToUser.findAll({
+        let userIDs = await teamToUser.findAll({
             where: {
                 TeamId: element.id,
                 isOwner: true
             },
         });
+        console.log(userIDs);
         if (schoolName !== null) {
-            let userDetail = UserDetails.findOne({
+            let userDetail = await UserDetails.findOne({
                 where: {
-                    UserId: userIDs.dataValues[0].id,
+                    UserId: userIDs[0].dataValues.UserId,
                     schoolName: schoolName
                 }
             });
@@ -80,9 +82,9 @@ exports.getCompetitionTeamDetails = async function (offset, competitionId, limit
                 });
             }
         } else {
-            let userDetail = UserDetails.findOne({
+            let userDetail = await UserDetails.findOne({
                 where: {
-                    UserId: userIDs.dataValues[0].id
+                    UserId: userIDs[0].dataValues.UserId,
                 }
             });
             res.push({

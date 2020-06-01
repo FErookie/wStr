@@ -438,6 +438,50 @@ data: {
     "err": null
 }
 ```
+
+### route名: /team/getCompetitionTeamDetails
+
+请求类型: post   
+请求体:  
+```
+{
+  "offset" : 0,
+  "competitionId" : "2e52a6f1-1d9b-48c4-914a-1136689ac152"
+   //可选参数 schoolName 用来筛选同校
+}
+```
+响应结果  
+```
+{
+    "code": 200,
+    "data": [
+        {
+            "teamData": {
+                "id": "21bf3ae3-067f-4d9a-9adc-8ac79e27d415",
+                "postTime": "2019-12-13T00:00:00.000Z",
+                "details": "测试用队伍",
+                "needPerson": 3,
+                "finTime": "2019-12-22T00:00:00.000Z",
+                "createdAt": "2020-05-16T09:36:36.756Z",
+                "updatedAt": "2020-05-16T09:36:36.756Z",
+                "CompetitionId": "df316dcd-1613-41d7-bdd4-405e22c3cda3"
+            },
+            "userData": {
+                "id": 1,
+                "schoolName": "克莱登大学",
+                "contact_wx": "",
+                "contact_phone": "",
+                "contact_qq": "",
+                "createdAt": "2020-05-16T09:33:22.815Z",
+                "updatedAt": "2020-05-16T09:33:22.815Z",
+                "UserId": "34c23a66-90e4-4d49-a8aa-6e6015e030da"
+            }
+        }
+    ],
+    "err": null
+}
+```
+
 ### route名: /team/getMyTeam
 
 请求类型: get    
@@ -636,6 +680,36 @@ data: {
                         "createdAt": "2020-05-12T07:23:03.342Z",
                         "updatedAt": "2020-05-12T07:23:03.342Z"
                     }
+    "err": null
+}
+
+```
+### route名: /public/getCompetition
+
+请求类型: post  
+请求参数:     
+```
+{  
+    competitionId:""
+}
+```
+响应结果  
+```
+{
+    "code": 200,
+    "data": {
+        "id": "556004ab-3730-41a9-a80a-e56ccf3bb206",
+        "status": "正在报名",
+        "type": "工科",
+        "title": "2020江西财经大学数学建模竞赛",
+        "level": "校级",
+        "url": "https://www.saikr.com/vse/2020JUFEMCM",
+        "sponsor": "江西财经大学创业学院、信息管理学院",
+        "registration": "2020.05.06 ～ 2020.05.20",
+        "finTime": "2020.05.21 ～ 2020.05.26",
+        "createdAt": "2020-05-16T09:29:17.753Z",
+        "updatedAt": "2020-05-16T09:29:17.753Z"
+    },
     "err": null
 }
 
