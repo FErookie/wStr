@@ -1,4 +1,4 @@
-const {getMyTeam, getCompetitionTeam, joinTeam, createTeam, getCompetitionTeamDetails} = require('../services/teamHandler');
+const {getMyTeam, getCompetitionTeam, joinTeam, createTeam, getCompetitionTeamDetails, getTeamDetails} = require('../services/teamHandler');
 const returns = require('../libs/return');
 
 exports.getMyTeam = async function(ctx) {
@@ -14,6 +14,21 @@ exports.getCompetitionTeam = async function(ctx) {
     let list = await getCompetitionTeam(data.offset, data.competitionId);
     ctx.returns(returns.code.SUCCESS, list, null);
 }
+
+exports.getAllTeam = async function(ctx) {
+    ctx.checkBody("offset").notEmpty();
+    let data = ctx.request.body;
+    let list = await getCompetitionTeamDetails(data.offset, null, data.limit, data.schoolName);
+    ctx.returns(returns.code.SUCCESS, list, null);
+}
+
+exports.getTeamDetails = async function(ctx) {
+    ctx.checkBody("teamID");
+    let data = ctx.request.body;
+    let content = await getTeamDetails(data.teamID);
+    ctx.returns(returns.code.SUCCESS, content, null);
+}
+
 exports.getCompetitionTeamDetails = async function(ctx) {
     ctx.checkBody("competitionId").notEmpty();
     let data = ctx.request.body;

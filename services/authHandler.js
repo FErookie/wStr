@@ -22,14 +22,16 @@ exports.checkUser = async function (openid) {
     })
 };// 检测是不是第一次登录 好像没啥用
 
-exports.createUserInfo = async function(openid){
+exports.createUserInfo = async function(openid, headImage, nickName){
     await User.findAll({
         where: {
             openId : openid
         }
     }).then(data=>{
         UserDetails.create({
-            UserId: data[0].dataValues.id
+            UserId: data[0].dataValues.id,
+            nickname: nickName,
+            headImage: headImage
         });
     })
 };

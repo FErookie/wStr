@@ -47,8 +47,38 @@ exports.getCompetitionTeam = async function (offset, competitionId, limit = 10) 
     });
     return parseFindAll(list);
 };//根据比赛id拿到队伍列表
+
+exports.getTeamDetails = async function (teamId) {
+    let relationShip = await teamToUser.findAll({
+        where: {
+            isOwner: true,
+            TeamId: teamId
+        }
+    });
+    let UserDetails = await UserDetails.findOne({
+        where: {
+            UserId: relationShip[0].dataValues.UserId
+        }
+    });
+    let TeamDetails = await Team.findOne({
+        where: {
+            id: teamId
+        }
+    });
+    return {
+        userDetails: UserDetails,
+        teamDetails: TeamDetails
+    }
+}
+
 exports.getCompetitionTeamDetails = async function (offset, competitionId, limit = 10, schoolName = null) {
-    let list = await Team.findAll({
+    let list = competitionId !== null ? await Team.findAll({
+        where: {
+            CompetitionId: competitionId
+        },
+        offset: offset,
+        limit: limit
+    }) : await Team.findAll({
         where: {
             CompetitionId: competitionId
         },

@@ -36,7 +36,7 @@ exports.login = async function(ctx){
         let token = await (new User('123')).setUser(user);
         if(status){
             await addUser("" , user.openId, user.sessionKey, "", user.headImage, user.nickname);
-            await createUserInfo(user.openId);
+            await createUserInfo(user.openId,  user.headImage, user.nickname);
         }
         let id = await getId(user.openId);
         let details = await queryUserDetails(id);

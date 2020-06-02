@@ -15,6 +15,14 @@ module.exports = (sequelize, DataTypes) => {
         contact_qq: {
             type: DataTypes.TEXT,
             defaultValue: ''
+        },
+        headImage: {
+            type: DataTypes.TEXT,
+            defaultValue: ''
+        },
+        nickname: {
+            type: DataTypes.STRING(32),
+            defaultValue: '游客'
         }
     })
 };
