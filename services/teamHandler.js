@@ -1,5 +1,5 @@
 const db = require('../models/index');
-const {User, Team, teamToUser, UserDetails} = db.models;
+const {User, Team, teamToUser, UserDetails, Competition} = db.models;
 const {parseFindAll} = require('../utils');
 
 exports.queryStatus = async function (userId, teamId) {
@@ -28,7 +28,22 @@ exports.getMyTeam = async function (openId) {
             });
             let res = [];
             for (let element of list) {
-                res.push(element.dataValues);
+                let CompetitionData = await Competition.findOne({
+                    where: {
+                        id: element.dataValues.CompetitionId
+                    }
+                });
+                let memberList = await teamToUser.findAll({
+                    attributes: 'UserId',
+                    where: {
+                        TeamId: element.dataValues.TeamId
+                    }
+                })
+                res.push({
+                    CompetitionData: CompetitionData.dataValues,
+                    TeamData: element.dataValues,
+                    MemberIDs: parseFindAll(memberList)
+                });
             }
             return res;
         }).catch(function (err) {
@@ -158,3 +173,23 @@ exports.createTeam = async function (openId, postTime, details, needPerson, finT
         });
     })
 };
+
+exports.deleteMember = async function(userId, teamId) {
+    let helpData = await teamToUser.findOne({
+        where: {
+            UserId: userId,
+            TeamId: teamId
+        }
+    });
+    if(helpData.dataValues.isOwner) {
+        return false;
+    } else {
+        await teamToUser.destroy({
+            where: {
+                UserId: userId,
+                TeamId: teamId
+            }
+        });
+        return true;
+    }
+}

@@ -1,5 +1,24 @@
-const {getMyTeam, getCompetitionTeam, joinTeam, createTeam, getCompetitionTeamDetails, getTeamDetails} = require('../services/teamHandler');
+const {getId} = require("../services/authHandler");
+const {getMyTeam, getCompetitionTeam, joinTeam, createTeam, getCompetitionTeamDetails, getTeamDetails, deleteMember} = require('../services/teamHandler');
+const {dispatchMessage} = require('../services/msgHandler')
 const returns = require('../libs/return');
+
+exports.deleteMember = async function(ctx) {
+    // 这个接口用来删除掉一个成员
+    ctx.checkBody("userId").notEmpty();
+    ctx.checkBody("teamId").notEmpty();
+
+    let uid = ctx.request.body.userId;
+    let tid = ctx.request.body.teamId;
+
+    let res = await deleteMember(uid, tid);
+    if(res === false){
+        ctx.returns(returns.code.PARAM_ERROR, '不要试图直接删除队长，拒绝解散队伍', null);
+    }else {
+        await dispatchMessage(uid, tid, "您已被移出队伍");
+        ctx.returns(returns.code.SUCCESS, '成功删除', null);
+    }
+}
 
 exports.getMyTeam = async function(ctx) {
     let user = await ctx.customUser.getUser();

@@ -1,6 +1,6 @@
 //这个文件处理入队申请
 const {getId} = require("../services/authHandler");
-const {dispatchMessage, getMyTeamApply, getMyFeedBack, updateMsg, getMsg} = require("../services/msgHandler")
+const {dispatchMessage, getMyTeamApply, getMyFeedBack, updateMsg, getMsg, deleteMessage} = require("../services/msgHandler")
 const {joinTeam, queryStatus} = require('../services/teamHandler')
 const returns = require('../libs/return');
 
@@ -24,6 +24,23 @@ exports.getMessage = async function (ctx) {
 
     let data = await getMyTeamApply(ctx.request.body.teamId);
     ctx.returns(returns.code.SUCCESS, data, null);
+}
+
+exports.deleteMessage = async function (ctx) {
+    //要撤销一个申请
+    //如果已经申请被处理 已经加入了队伍 就新建一个申请 告知队伍的组织者 现在想要退出
+    //如果没有被处理 就删除掉 对应message
+    ctx.checkBody("msgId").notEmpty();
+
+    let status = await deleteMessage(ctx.request.body.msgId);
+    if(status === false) {
+        ctx.returns(ctx.code.SUCCESS, '撤回成功', null);
+    } else {
+        let user = await ctx.customUser.getUser();
+        let id = await getId(user.openId);
+        await dispatchMessage(id, status, "希望退出队伍");
+        ctx.returns(ctx.code.SUCCESS, '已经提出退出队伍的申请，等待队长删除队员', null);
+    }
 }
 
 exports.getMyFeedBack = async function (ctx) {

@@ -62,3 +62,11 @@ exports.updateInfo = async function(ctx){
     ctx.returns(returns.code.SUCCESS, "success", null);
 
 };
+
+exports.getInfo = async function(ctx) {
+    ctx.checkBody("userId").notEmpty();
+
+    let id = ctx.request.body.userId;
+    let res = await queryUserDetails(id);
+    ctx.returns(returns.code.SUCCESS, res, null);
+}
