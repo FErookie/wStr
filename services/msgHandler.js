@@ -18,7 +18,7 @@ exports.getMyTeamApply = async function (TeamId) {
     });
     let teamMessage = await Team.findOne({
         where: {
-            teamId: TeamId
+            id: TeamId
         }
     });
     return {

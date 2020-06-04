@@ -53,51 +53,6 @@ data:{
 }
 
 ```
-### route名: /public/getTypes
-
-请求类型: get   
-响应结果  
-```
-data: {
-    "code": 200,
-    "data": [
-        "土木建筑",
-        "挑战杯",
-        "职业技能",
-        "力学",
-        "理科",
-        "物理",
-        "创青春",
-        "工程机械",
-        "交通车辆",
-        "电子&自动化",
-        "科技文化艺术节",
-        "创业",
-        "模特",
-        "航空航天",
-        "数学",
-        "工科",
-        "材料高分子",
-        "健康生命&医学",
-        "计算机&信息技术",
-        "演讲主持&辩论",
-        "数学建模",
-        "社会综合",
-        "商业",
-        "环保公益",
-        "程序设计",
-        "综合",
-        "化学化工",
-        "商科",
-        "外语",
-        "体育",
-        "文体",
-        "机器人",
-        "环境能源"
-    ],
-    "err": null
-}
-```
 
 ### route名: /public/getTypes
 
@@ -140,27 +95,6 @@ data: {
         "文体",
         "机器人",
         "环境能源"
-    ],
-    "err": null
-}
-```
-
-### route名: /public/getLists
-
-请求类型: post  
-请求体:
-```
-{
-    type: "",
-    offset: ,//分页用的数字
-}
-```
-响应结果
-```
-data: {
-    "code": 200,
-    "data": [
-
     ],
     "err": null
 }
@@ -317,27 +251,7 @@ data: {
 }
 }
 ```
-### route名: /public/createTeam
 
-请求类型: post   
-请求体:  
-```
-{
-    "postTime": "2019-12-13",
-    "details": "测试用队伍",
-    "needPerson": 3,
-    "finTime": "2019-12-22",
-    "competitionId": "2e52a6f1-1d9b-48c4-914a-1136689ac152"
-}
-```
-响应结果  
-```
-data: {
-    "code": 200,
-    "data": null
-    "err": null
-}
-```
 ### route名: /team/createTeam
 
 请求类型: post    
@@ -457,14 +371,14 @@ data: {
     "data": [
         {
             "teamData": {
-                "id": "21bf3ae3-067f-4d9a-9adc-8ac79e27d415",
+                "id": "c072cca2-de23-47ab-96b2-34a2e6967305",
                 "postTime": "2019-12-13T00:00:00.000Z",
                 "details": "测试用队伍",
                 "needPerson": 3,
                 "finTime": "2019-12-22T00:00:00.000Z",
-                "createdAt": "2020-05-16T09:36:36.756Z",
-                "updatedAt": "2020-05-16T09:36:36.756Z",
-                "CompetitionId": "df316dcd-1613-41d7-bdd4-405e22c3cda3"
+                "createdAt": "2020-06-04T10:56:58.160Z",
+                "updatedAt": "2020-06-04T10:56:58.160Z",
+                "CompetitionId": "4851c0a2-4a1d-43ef-927f-6c3cdbb3e0bd"
             },
             "userData": {
                 "id": 1,
@@ -472,9 +386,11 @@ data: {
                 "contact_wx": "",
                 "contact_phone": "",
                 "contact_qq": "",
-                "createdAt": "2020-05-16T09:33:22.815Z",
-                "updatedAt": "2020-05-16T09:33:22.815Z",
-                "UserId": "34c23a66-90e4-4d49-a8aa-6e6015e030da"
+                "headImage": "https://wx.qlogo.cn/mmopen/vi_32/6y8ZoicCCP2TzMzbg001wFkNMT13d7S4JL0QWggZx7iaqMRT8mibQc6ngYZSgl9hpOSqetda3hCIlUoIvHiaoEwDOQ/132",
+                "nickname": "新吧唧",
+                "createdAt": "2020-06-04T10:46:35.013Z",
+                "updatedAt": "2020-06-04T10:46:35.013Z",
+                "UserId": "6cf65cd8-2e81-48e6-a474-cfacb4ce15a4"
             }
         }
     ],
@@ -488,54 +404,50 @@ data: {
 
 响应结果  
 ```
-data: {
-          "code": 200,
-          "data": [
-              {
-                  "isOwner": true,
-                  "createdAt": "2020-05-12T11:20:38.796Z",
-                  "updatedAt": "2020-05-12T11:20:38.796Z",
-                  "TeamId": "41e30bab-414e-4ef4-a3e9-6640bd5017b9",
-                  "UserId": "b897a97d-6d1c-476a-9de1-8236eb129786"
-              },
-              {
-                  "isOwner": true,
-                  "createdAt": "2020-05-12T11:21:40.161Z",
-                  "updatedAt": "2020-05-12T11:21:40.161Z",
-                  "TeamId": "458a8794-a60a-4e12-a7e8-e314420cd273",
-                  "UserId": "b897a97d-6d1c-476a-9de1-8236eb129786"
-              },
-              {
-                  "isOwner": true,
-                  "createdAt": "2020-05-12T11:22:33.190Z",
-                  "updatedAt": "2020-05-12T11:22:33.190Z",
-                  "TeamId": "71693995-19e4-4659-8d29-4bf013505d56",
-                  "UserId": "b897a97d-6d1c-476a-9de1-8236eb129786"
-              },
-              {
-                  "isOwner": true,
-                  "createdAt": "2020-05-12T11:22:33.898Z",
-                  "updatedAt": "2020-05-12T11:22:33.898Z",
-                  "TeamId": "df14a4b4-db29-4185-a4bb-48e39d48c85e",
-                  "UserId": "b897a97d-6d1c-476a-9de1-8236eb129786"
-              },
-              {
-                  "isOwner": true,
-                  "createdAt": "2020-05-12T11:22:35.147Z",
-                  "updatedAt": "2020-05-12T11:22:35.147Z",
-                  "TeamId": "d14992d4-166a-4a09-b059-f6ad49644ced",
-                  "UserId": "b897a97d-6d1c-476a-9de1-8236eb129786"
-              },
-              {
-                  "isOwner": true,
-                  "createdAt": "2020-05-12T11:22:36.441Z",
-                  "updatedAt": "2020-05-12T11:22:36.441Z",
-                  "TeamId": "dccb2d90-16c1-4f59-9328-1133569813b3",
-                  "UserId": "b897a97d-6d1c-476a-9de1-8236eb129786"
-              }
-          ],
-          "err": null
-      }
+{
+    "code": 200,
+    "data": [
+        {
+            "CompetitionData": {
+                "id": "4851c0a2-4a1d-43ef-927f-6c3cdbb3e0bd",
+                "status": "正在报名",
+                "type": "工科",
+                "title": "2020年“远见者杯”全国大学生创新促进就业（简历设计）大赛",
+                "level": "国家级",
+                "url": "https://www.saikr.com/vse/resume/2020",
+                "sponsor": "《智慧中国》杂志社 中国电子商会",
+                "registration": "2020.02.18 ～ 2020.06.30",
+                "finTime": "2020.02.18 ～ 2020.06.30",
+                "createdAt": "2020-06-04T10:37:04.972Z",
+                "updatedAt": "2020-06-04T10:37:04.972Z"
+            },
+            "TeamData": {
+                "isOwner": true,
+                "createdAt": "2020-06-04T10:56:58.245Z",
+                "updatedAt": "2020-06-04T10:56:58.245Z",
+                "TeamId": "c072cca2-de23-47ab-96b2-34a2e6967305",
+                "UserId": "6cf65cd8-2e81-48e6-a474-cfacb4ce15a4"
+            },
+            "MemberIDs": [
+                {
+                    "isOwner": true,
+                    "createdAt": "2020-06-04T10:56:58.245Z",
+                    "updatedAt": "2020-06-04T10:56:58.245Z",
+                    "TeamId": "c072cca2-de23-47ab-96b2-34a2e6967305",
+                    "UserId": "6cf65cd8-2e81-48e6-a474-cfacb4ce15a4"
+                },
+                {
+                    "isOwner": false,
+                    "createdAt": "2020-06-04T11:49:12.129Z",
+                    "updatedAt": "2020-06-04T11:49:12.129Z",
+                    "TeamId": "c072cca2-de23-47ab-96b2-34a2e6967305",
+                    "UserId": "923f5609-eb11-413c-9d13-318956a6df70"
+                }
+            ]
+        }
+    ],
+    "err": null
+}
 ```
 ### route名: /message/dispatch
 用来发起申请  
@@ -543,7 +455,9 @@ data: {
 请求体:  
 ```
 {
-    "teamId": ""
+    "teamId": "",
+	"describeText": "申请"
+
 }
 ```
 响应结果 不在队伍中时
@@ -573,22 +487,34 @@ data: {
 ```
 响应结果  
 ```
-data: {
-         "code": 200,
-         "data": [
-             {
-                 "id": "49fa569f-1dd4-4ad1-9abc-f931c2adb460",
-                 "userId": "97daf453-af4f-4f1f-87c4-d2641d2d71a9",
-                 "teamId": "21bf3ae3-067f-4d9a-9adc-8ac79e27d415",
-                 "hasDeal": false,
-                 "status": false,
-                 "describeText": "测试消息",
-                 "createdAt": "2020-05-16T10:30:31.340Z",
-                 "updatedAt": "2020-05-16T10:30:31.340Z"
-             }
-         ],
-         "err": null
-     }
+{
+    "code": 200,
+    "data": {
+        "messageData": [
+            {
+                "id": "3c576001-2313-4c1f-b165-7aea1b629009",
+                "userId": "923f5609-eb11-413c-9d13-318956a6df70",
+                "teamId": "c072cca2-de23-47ab-96b2-34a2e6967305",
+                "hasDeal": false,
+                "status": false,
+                "describeText": "申请",
+                "createdAt": "2020-06-04T11:40:32.249Z",
+                "updatedAt": "2020-06-04T11:40:32.249Z"
+            }
+        ],
+        "teamData": {
+            "postTime": "2019-12-13 08:00:00",
+            "finTime": "2019-12-22 08:00:00",
+            "id": "c072cca2-de23-47ab-96b2-34a2e6967305",
+            "details": "测试用队伍",
+            "needPerson": 3,
+            "createdAt": "2020-06-04T10:56:58.160Z",
+            "updatedAt": "2020-06-04T10:56:58.160Z",
+            "CompetitionId": "4851c0a2-4a1d-43ef-927f-6c3cdbb3e0bd"
+        }
+    },
+    "err": null
+}
 ```
 ### route 名 /message/dealMessage
 暂时支持对消息进行多次处理 可以商量  
@@ -612,27 +538,7 @@ data: {
 
 ```
 
-### route 名 /message/dealMessage
-暂时支持对消息进行多次处理 可以商量  
-请求类型: post    
-请求体:  
-```
-{
-	"msgId": "49fa569f-1dd4-4ad1-9abc-f931c2adb460",
-	"status": true,//用来表示同不同意 
-	"describeText": "huanying"
-}
-```
-响应结果：
-```
 
-data: {
-    "code": 200,
-    "data": "处理完成",
-    "err": null
-}
-
-```
 ### 路由名：/message/getMyFeedBack
 请求类型：get
 响应体：
@@ -684,33 +590,80 @@ data: {
 }
 
 ```
-### route名: /public/getCompetition
 
-请求类型: post  
-请求参数:     
+### 路由名：/team/deleteMember
+请求类型：post
+请求体:  
 ```
-{  
-    competitionId:""
+{
+	"userId": "923f5609-eb11-413c-9d13-318956a6df70",
+	"teamId": "c072cca2-de23-47ab-96b2-34a2e6967305"
 }
 ```
-响应结果  
+响应结果：
+```
+{
+    "code": 200,
+    "data": "成功删除",
+    "err": null
+}
+```
+
+### 路由名：/team/deleteMember
+请求类型：post
+请求体:  
+```
+{
+	"userId": "923f5609-eb11-413c-9d13-318956a6df70",
+	"teamId": "c072cca2-de23-47ab-96b2-34a2e6967305"
+}
+```
+响应结果：
+```
+{
+    "code": 200,
+    "data": "成功删除",
+    "err": null
+}
+```
+
+### 路由名：/team/getTeamDetails
+请求类型：post
+请求体:  
+```
+{
+	"teamId": "c072cca2-de23-47ab-96b2-34a2e6967305"
+}
+```
+
+响应结果：
 ```
 {
     "code": 200,
     "data": {
-        "id": "556004ab-3730-41a9-a80a-e56ccf3bb206",
-        "status": "正在报名",
-        "type": "工科",
-        "title": "2020江西财经大学数学建模竞赛",
-        "level": "校级",
-        "url": "https://www.saikr.com/vse/2020JUFEMCM",
-        "sponsor": "江西财经大学创业学院、信息管理学院",
-        "registration": "2020.05.06 ～ 2020.05.20",
-        "finTime": "2020.05.21 ～ 2020.05.26",
-        "createdAt": "2020-05-16T09:29:17.753Z",
-        "updatedAt": "2020-05-16T09:29:17.753Z"
+        "userDetails": {
+            "id": 1,
+            "schoolName": "克莱登大学",
+            "contact_wx": "",
+            "contact_phone": "",
+            "contact_qq": "",
+            "headImage": "https://wx.qlogo.cn/mmopen/vi_32/6y8ZoicCCP2TzMzbg001wFkNMT13d7S4JL0QWggZx7iaqMRT8mibQc6ngYZSgl9hpOSqetda3hCIlUoIvHiaoEwDOQ/132",
+            "nickname": "新吧唧",
+            "createdAt": "2020-06-04T10:46:35.013Z",
+            "updatedAt": "2020-06-04T10:46:35.013Z",
+            "UserId": "6cf65cd8-2e81-48e6-a474-cfacb4ce15a4"
+        },
+        "teamDetails": {
+            "postTime": "2019-12-13 08:00:00",
+            "finTime": "2019-12-22 08:00:00",
+            "id": "c072cca2-de23-47ab-96b2-34a2e6967305",
+            "details": "测试用队伍",
+            "needPerson": 3,
+            "createdAt": "2020-06-04T10:56:58.160Z",
+            "updatedAt": "2020-06-04T10:56:58.160Z",
+            "CompetitionId": "4851c0a2-4a1d-43ef-927f-6c3cdbb3e0bd"
+        }
     },
     "err": null
 }
-
 ```

@@ -5,12 +5,13 @@ const returns = require('../libs/return');
 
 exports.deleteMember = async function(ctx) {
     // 这个接口用来删除掉一个成员
+
     ctx.checkBody("userId").notEmpty();
     ctx.checkBody("teamId").notEmpty();
 
     let uid = ctx.request.body.userId;
     let tid = ctx.request.body.teamId;
-
+    console.log(uid, tid);
     let res = await deleteMember(uid, tid);
     if(res === false){
         ctx.returns(returns.code.PARAM_ERROR, '不要试图直接删除队长，拒绝解散队伍', null);
@@ -42,9 +43,9 @@ exports.getAllTeam = async function(ctx) {
 }
 
 exports.getTeamDetails = async function(ctx) {
-    ctx.checkBody("teamID");
+    ctx.checkBody("teamId");
     let data = ctx.request.body;
-    let content = await getTeamDetails(data.teamID);
+    let content = await getTeamDetails(data.teamId);
     ctx.returns(returns.code.SUCCESS, content, null);
 }
 

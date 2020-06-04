@@ -1,7 +1,7 @@
 const db = require('../models/index');
 const {User, Team, teamToUser, UserDetails, Competition} = db.models;
 const {parseFindAll} = require('../utils');
-
+const {queryUserDetails} = require('./authHandler');
 exports.queryStatus = async function (userId, teamId) {
     let relationShip = await teamToUser.findOne({
         where: {
@@ -28,13 +28,18 @@ exports.getMyTeam = async function (openId) {
             });
             let res = [];
             for (let element of list) {
-                let CompetitionData = await Competition.findOne({
+                let CompetitionId = await Team.findOne({
                     where: {
-                        id: element.dataValues.CompetitionId
+                        id: element.dataValues.TeamId
                     }
                 });
+                let CompetitionData = await Competition.findOne({
+                    where: {
+                        id: CompetitionId.dataValues.CompetitionId
+                    }
+                })
+                console.log(CompetitionId);
                 let memberList = await teamToUser.findAll({
-                    attributes: 'UserId',
                     where: {
                         TeamId: element.dataValues.TeamId
                     }
@@ -70,18 +75,15 @@ exports.getTeamDetails = async function (teamId) {
             TeamId: teamId
         }
     });
-    let UserDetails = await UserDetails.findOne({
-        where: {
-            UserId: relationShip[0].dataValues.UserId
-        }
-    });
+    console.log(relationShip);
+
     let TeamDetails = await Team.findOne({
         where: {
             id: teamId
         }
     });
     return {
-        userDetails: UserDetails,
+        userDetails: await queryUserDetails(relationShip[0].dataValues.UserId),
         teamDetails: TeamDetails
     }
 }
