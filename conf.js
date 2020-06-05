@@ -27,8 +27,8 @@ module.exports = {
         }
     },
     wxConfig:{
-        appId: 'wxb70173be95a31d4f',
-        appSecret: '2dbf0f12334ca7d3f5d2af78f664aa35',
+        appId: 'wx08501d23335ee1ad',
+        appSecret: '5acbb04113c5600993c08890ea9011f7',
     },
     log: {
         root: logDir,

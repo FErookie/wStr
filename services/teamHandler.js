@@ -96,9 +96,6 @@ exports.getCompetitionTeamDetails = async function (offset, competitionId, limit
         offset: offset,
         limit: limit
     }) : await Team.findAll({
-        where: {
-            CompetitionId: competitionId
-        },
         offset: offset,
         limit: limit
     });
@@ -114,6 +111,15 @@ exports.getCompetitionTeamDetails = async function (offset, competitionId, limit
                 isOwner: true
             },
         });
+	        let comData = await Competition.findOne({
+
+			            where: {
+
+					                    id: element.CompetitionId
+
+					                }
+
+			        })
         console.log(userIDs);
         if (schoolName !== null) {
             let userDetail = await UserDetails.findOne({
@@ -136,7 +142,8 @@ exports.getCompetitionTeamDetails = async function (offset, competitionId, limit
             });
             res.push({
                 teamData: element,
-                userData: userDetail
+                userData: userDetail,
+		competitionData: comdata
             });
         }
     }
@@ -195,3 +202,52 @@ exports.deleteMember = async function(userId, teamId) {
         return true;
     }
 }
+exports.deleteTeam = async function(teamId) {
+
+	    let userIDs = await teamToUser.findAll({
+
+		            where: {
+
+				                TeamId: teamId
+
+				            }
+
+		        });
+
+
+
+	    await db.transaction(async function (t) {
+
+		            return await teamToUser.destroy({
+
+				                where: {
+
+							                TeamId: teamId
+
+							            }
+
+				            }, {transaction: t}).then(async function (user) {
+
+						                await Team.destroy({
+
+									                where: {
+
+												                    TeamId: teamId
+
+												                }
+
+									            })
+
+						            }).catch(function (err) {
+
+								                throw new Error(err);
+
+								            })
+
+		        });
+
+	    return parseFindAll(userIDs);
+
+}
+
+

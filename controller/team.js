@@ -1,5 +1,5 @@
 const {getId} = require("../services/authHandler");
-const {getMyTeam, getCompetitionTeam, joinTeam, createTeam, getCompetitionTeamDetails, getTeamDetails, deleteMember} = require('../services/teamHandler');
+const {deleteTeam, getMyTeam, getCompetitionTeam, joinTeam, createTeam, getCompetitionTeamDetails, getTeamDetails, deleteMember} = require('../services/teamHandler');
 const {dispatchMessage} = require('../services/msgHandler')
 const returns = require('../libs/return');
 
@@ -69,6 +69,20 @@ exports.createTeam = async function(ctx) {
     console.log(data.competitionId);
     await createTeam(user.openId, data.postTime, data.details, data.needPerson, data.finTime, data.competitionId);
     ctx.returns(returns.code.SUCCESS, null, null);
+}
+
+exports.deleteTeam = async function(ctx) {
+    ctx.checkBody("teamId").notEmpty();
+    
+    let tid = ctx.request.body.teamId;
+    let res = await deleteTeam(tid);
+    
+    for(let element of res){
+    	await dispatchMessage(element.UserId, tid, "因为队伍都被删除了，所以您被移出队伍");
+	
+    }
+    ctx.returns(returns.code.SUCCESS, "", null);
+
 }
 
 exports.acceptNewUser = async function(ctx) {
