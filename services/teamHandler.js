@@ -82,9 +82,15 @@ exports.getTeamDetails = async function (teamId) {
             id: teamId
         }
     });
+    let comDetails = await Competition.findOne({
+    	where: {
+	    id: TeamDetails.dataValues.CompetitionId
+	}
+    });
     return {
         userDetails: await queryUserDetails(relationShip[0].dataValues.UserId),
-        teamDetails: TeamDetails
+        teamDetails: TeamDetails.dataValues,
+	competitionDetails: comDetails.dataValues
     }
 }
 
