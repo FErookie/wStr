@@ -70,7 +70,15 @@ exports.createTeam = async function(ctx) {
     await createTeam(user.openId, data.postTime, data.details, data.needPerson, data.finTime, data.competitionId);
     ctx.returns(returns.code.SUCCESS, null, null);
 }
+exports.filterTeam = async function(ctx) {
+       ctx.checkBody("offset").notEmpty();
+       ctx.checkBody("type").notEmpty();
+	    let data = ctx.request.body;
 
+	    let list = await getCompetitionTeamDetails(data.offset, null, data.limit, data.schoolName, data.type);
+
+	    ctx.returns(returns.code.SUCCESS, list, null);
+}
 exports.deleteTeam = async function(ctx) {
     ctx.checkBody("teamId").notEmpty();
     

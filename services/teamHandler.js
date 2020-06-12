@@ -45,8 +45,8 @@ exports.getMyTeam = async function (openId) {
                     }
                 })
                 res.push({
-                    CompetitionData: CompetitionData.dataValues,
-                    TeamData: element.dataValues,
+                    CompetitionData: CompetitionData,
+                    TeamData: element,
                     MemberIDs: parseFindAll(memberList)
                 });
             }
@@ -94,20 +94,65 @@ exports.getTeamDetails = async function (teamId) {
     }
 }
 
-exports.getCompetitionTeamDetails = async function (offset, competitionId, limit = 10, schoolName = null) {
-    let list = competitionId !== null ? await Team.findAll({
+exports.getCompetitionTeamDetails = async function (offset, competitionId, limit = 10, schoolName = null, type = null) {
+    let list = null;
+    if(type) {
+        list = await Team.findAll({
+                include: [{
+
+			model: Competition,
+			required:false  //left join
+		}],   
+
+		                    'order': [
+
+
+
+					                                            ['updatedAt', 'DESC'],
+
+
+
+
+
+
+
+					                                        ],
+
+		        offset: offset,
+
+		        limit: limit
+	
+	});
+	list = list.filter(function(cur) {
+		return cur.Competition.type === type;
+	});
+   
+    } else {
+
+        list = competitionId !== null ? await Team.findAll({
         where: {
             CompetitionId: competitionId
         },
+	            'order': [
+
+			                ['updatedAt', 'DESC'],
+
+
+
+			            ],
         offset: offset,
         limit: limit
     }) : await Team.findAll({
+	'order': [
+            ['updatedAt', 'DESC'],
+	      
+        ],
         offset: offset,
         limit: limit
     });
+    };
     //首先 要从所有的这个list中的每一个的信息里得到对应的User 和 UserDetail 然后返回
     let data = parseFindAll(list);
-    console.log(data);
     let res = [];
     for (let element of data) {
         //这个也只会有一个
@@ -149,7 +194,7 @@ exports.getCompetitionTeamDetails = async function (offset, competitionId, limit
             res.push({
                 teamData: element,
                 userData: userDetail,
-		competitionData: comdata
+		competitionData: comData
             });
         }
     }
@@ -238,7 +283,7 @@ exports.deleteTeam = async function(teamId) {
 
 									                where: {
 
-												                    TeamId: teamId
+												                    id: teamId
 
 												                }
 
